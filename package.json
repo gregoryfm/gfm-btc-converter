@@ -4,6 +4,8 @@
   "description": "CLI para converter bitcoin para qualquer outra moeda.",
   "main": "index.js",
   "scripts": {
+    "build": "npm run clear && ./node_modules/.bin/babel --out-dir bin src",
+    "build:watch": "npm run build -- --watch",
     "lint": "./node_modules/.bin/eslint src/*.js",
     "prepush": "npm run lint && npm run test:coverage",
     "test": "./node_modules/.bin/mocha tests/**/*.spec.js --bail --require babel-register",
@@ -46,6 +48,8 @@
     "gitignore": "^0.6.0"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-register": "^6.26.0",
     "chai": "^4.1.2",
