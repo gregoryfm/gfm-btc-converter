@@ -12,5 +12,28 @@ describe('Main CLI', () => {
     });
   });
 
-  
+  it('should return description when gfm-btc-converter --help', (done) => {
+    exec( `${btcConverter} --help`, ( err, stdout, stderr ) => {
+      if ( err ) throw err;
+      expect( stdout.includes( 'Convert bitcoin to any currency defined.' ) ).to.be.true;
+      done();
+    });
+  });
+
+  it('should return the currency option when  gfm-btc-converter --help', (done) => {
+    exec( `${btcConverter} --help`, ( err, stdout, stderr ) => {
+      if ( err ) throw err;
+      expect( stdout.includes( '--currency' ) ).to.be.true;
+      done();
+    });
+  });
+
+  it('should return the amount option when  gfm-btc-converter --help', (done) => {
+    exec( `${btcConverter} --help`, ( err, stdout, stderr ) => {
+      if ( err ) throw err;
+      expect( stdout.includes( '--amount' ) ).to.be.true;
+      done();
+    });
+  });
+
 });
