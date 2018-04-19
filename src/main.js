@@ -10,4 +10,4 @@ commander
     .option('-a, --amount <amount>', 'Value in bitcoin to convert. (Default: 1).')
     .parse(process.argv);
 
-console.log(convertBTC(commander.currency, commander.amount));
+convertBTC(commander.currency, commander.amount);
