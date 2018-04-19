@@ -26,7 +26,7 @@ describe('ConvertBTC', () => {
     console.log.restore();
   });
 
-  it('should use currency USD and 1 as amount default', (done) => {
+  it('should use currency BRL and 1 as amount default', (done) => {
     nock('https://apiv2.bitcoinaverage.com')
       .get('/convert/global')
       .query({ from: 'BTC', to: 'BRL', amount: 1})
@@ -34,23 +34,52 @@ describe('ConvertBTC', () => {
 
     convertBTC();
 
-    setTimeout(() =>{
+    setTimeout(() => {
       expect(consoleStub).to.have.been.calledWith('1 BTC to BRL = 2490.78');
       done();
-    }, 300)
+    }, 300);
   });
 
-  it('should use currency USD and 10 as amount', (done) => {
+  it('should use currency BRL and 10 as amount', (done) => {
     nock('https://apiv2.bitcoinaverage.com')
       .get('/convert/global')
-      .query({ from: 'BTC', to: 'USD', amount: 10})
+      .query({ from: 'BTC', to: 'BRL', amount: 10})
       .reply(200, responseMock);
 
-    convertBTC('USD', 10);
+    convertBTC('BRL', 10);
 
-    setTimeout(() =>{
-      expect(consoleStub).to.have.been.calledWith('10 BTC to USD = 2490.78');
+    setTimeout(() => {
+      expect(consoleStub).to.have.been.calledWith('10 BTC to BRL = 2490.78');
       done();
-    }, 300)
+    }, 300);
   });
+
+  it('should use currency BRL and 1 as amount default', (done) => {
+    nock('https://apiv2.bitcoinaverage.com')
+      .get('/convert/global')
+      .query({ from: 'BTC', to: 'BRL', amount: 1})
+      .reply(200, responseMock);
+
+    convertBTC('BRL');
+
+    setTimeout(() => {
+      expect(consoleStub).to.have.been.calledWith('1 BTC to BRL = 2490.78');
+      done();
+    }, 300);
+  });
+
+  it('should show message to user when api reply with error', (done) => {
+    nock('https://apiv2.bitcoinaverage.com')
+      .get('/convert/global')
+      .query({ from: 'BTC', to: 'BRL', amount: 1})
+      .replyWithError('error');
+
+    convertBTC('BRL');
+
+    setTimeout(() => {
+      expect(consoleStub).to.have.been.calledWith('Something went wrong in the API');
+      done();
+    }, 300);
+  });
+
 });
