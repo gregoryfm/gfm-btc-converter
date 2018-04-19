@@ -44,6 +44,7 @@
   },
   "homepage": "https://github.com/gregoryfm/btc-converter#readme",
   "dependencies": {
+    "chalk": "^2.4.0",
     "commander": "^2.15.1",
     "gitignore": "^0.6.0",
     "request": "^2.85.0"
